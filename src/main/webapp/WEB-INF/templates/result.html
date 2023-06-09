@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Finder: Results</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../../css/styles.min.css}">
+</head>
+<body>
+    <div class="result">
+
+
+
+        <table class="images-table" th:fragment="image-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Domain</th>
+                    <th>Logo?</th>
+                    <th>Favicon?</th>
+                    <th>URL</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="image : ${images}">
+                    <td th:text="${image.getName()}"></td>
+                    <td th:text="${image.getDomain()}"></td>
+                    <td th:text="${image.isLogo()}"></td>
+                    <td th:text="${image.isFavicon()}"></td>
+                    <td th:text="${image.getUrl()}"></td>
+                    <td><a th:href="${image.getUrl()}">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

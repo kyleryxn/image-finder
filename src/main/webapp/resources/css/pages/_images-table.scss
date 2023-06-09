@@ -1,0 +1,27 @@
+.images-table {
+  border-collapse: separate;
+}
+
+.images-table thead {
+  color: #081C15;
+  text-align: center;
+  font-weight: bold;
+  padding: 5rem;
+}
+
+.images-table thead tr {
+  background-color: #52b788;
+}
+
+.images-table th,
+.images-table td {
+  padding: 1rem;
+}
+
+.images-table tr:nth-child(even) {
+  background-color: #74C69D;
+}
+
+.images-table tr:nth-child(odd) {
+  background-color: #95D5B2;
+}

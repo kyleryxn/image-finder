@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Finder</title>
+    <link rel="stylesheet" type="text/css" th:href="@{../../css/styles.min.css}">
+</head>
+<body>
+
+    <div class="container">
+
+        <header class="">
+            <img id="eulerity-logo" th:src="@{${'/images/eulerity-logo.png'}}" alt="Eulerity Logo">
+            <h1>Image Finder</h1>
+            <h3>Open Hackathon</h3>
+        </header>
+
+        <div class="form-container">
+
+            <p>This web crawler is designed to crawl a website, and grab all the images therein.</p>
+            <ul class="image-extensions">
+                <li>Only these types of images are considered valid:</li>
+                <li class="list">.gif</li>
+                <li class="list">.ico</li>
+                <li class="list">.jpeg/jpg</li>
+                <li class="list">.png</li>
+                <li class="list">.svg</li>
+            </ul>
+
+            <p id="note"><strong>Note:</strong> allow some time to pass for the crawler to finish crawling the site.
+                Remember, some sites are larger than others.</p>
+
+            <form class="url-form" action="/crawl" method="post">
+                <div class="url-form-group">
+                    <label for="urlInput">Enter URL:</label>
+                    <input type="text" id="urlInput" name="url" th:value="${url}"><br>
+                </div>
+                <button type="submit" id="urlBtn">Submit</button>
+            </form>
+            <p id="message" class="msg-btn" th:if="${showMessage}" th:text="${message}"></p>
+        </div>
+
+        <p id="table-p">Images data will appear below:</p>
+        <div class="table-container">
+            <table class="images-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Domain</th>
+                        <th>Logo?</th>
+                        <th>Favicon?</th>
+                        <th>URL</th>
+                        <th>Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="image : ${images}">
+                        <td th:text="${image.getName()}"></td>
+                        <td th:text="${image.getDomain()}"></td>
+                        <td th:text="${image.isLogo()}"></td>
+                        <td th:text="${image.isFavicon()}"></td>
+                        <td th:text="${image.getUrl()}"></td>
+                        <td><a th:href="${image.getUrl()}">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
