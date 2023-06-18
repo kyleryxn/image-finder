@@ -68,7 +68,7 @@ public class Crawl implements Runnable {
      */
     private void processLink(String url) {
 
-        // Put if absent: if the href is not present in visitedLinks, add it with the value false
+        // Put if absent: if the link is not present in visitedLinks, add it with the value false
         visitedLinks.putIfAbsent(url, false);
 
         // If the link has not been visited yet

@@ -20,7 +20,7 @@ public class ResourceUtilityTest {
     void testWriteToJSON() {
         String url = "https://www.avant-gardner.com";
         Map<String, Set<Image>> images = new WebCrawler(url).crawl();
-        ResourceUtility.writeImageMapToJson(images);
+        ResourceUtility.writeMapToJson("images.json", images);
         File file = new File("src/main/webapp/WEB-INF/images.json");
 
         assertTrue(file.exists());

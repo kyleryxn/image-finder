@@ -1,6 +1,7 @@
 package com.github.kyleryxn.imagefinder.util;
 
 import com.github.kyleryxn.imagefinder.model.Image;
+import com.github.kyleryxn.imagefinder.model.Statistic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
@@ -18,27 +19,40 @@ import java.util.Set;
  */
 public class ResourceUtility {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourceUtility.class);
-    private static final String FILE_PATH = "src/main/webapp/WEB-INF/images.json";
+    private static final String FILE_PATH = "src/main/webapp/WEB-INF/";
+    private static final Gson gson = new GsonBuilder()
+            .disableHtmlEscaping()
+            .setPrettyPrinting()
+            .create();
 
     /**
      * Writes a {@link Map} of Strings to Sets of Images to a JSON file.
      *
-     * @param imageMap the Map of Strings to Sets of Images to be written to JSON
+     * @param map the Map of Strings to Sets of T to be written to JSON
      * @see Set
      * @see Image
      */
-    public static void writeImageMapToJson(Map<String, Set<Image>> imageMap) {
-        Gson gson = new GsonBuilder()
-                .disableHtmlEscaping()
-                .setPrettyPrinting()
-                .create();
-        String json = gson.toJson(imageMap);
+    public static <T> void writeMapToJson(String filename, Map<String, Set<T>> map) {
+        String json = gson.toJson(map);
 
-        try (Writer writer = new FileWriter(FILE_PATH);
+        try (Writer writer = new FileWriter(FILE_PATH + filename);
              BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
 
             bufferedWriter.write(json);
-            System.out.println("Image map data has been written to '" + FILE_PATH + "'");
+            System.out.println("Image map data has been written to '" + FILE_PATH + filename + "'");
+        } catch (IOException e) {
+            LOGGER.error("Cannot write file : {}", e.getMessage());
+        }
+    }
+
+    public static void writeStatsToJson(Statistic statistics) {
+        String json = gson.toJson(statistics);
+
+        try (Writer writer = new FileWriter(FILE_PATH + "stats.json");
+             BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
+
+            bufferedWriter.write(json);
+            System.out.println("Statistics data has been written to '" + FILE_PATH + "stats.json" + "'");
         } catch (IOException e) {
             LOGGER.error("Cannot write file : {}", e.getMessage());
         }

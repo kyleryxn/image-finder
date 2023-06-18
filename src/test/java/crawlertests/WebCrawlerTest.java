@@ -14,12 +14,12 @@ public class WebCrawlerTest {
     @Test
     @DisplayName("Test: Crawl")
     void testCrawl() {
-        String url = "https://www.brex.com/";
+        String url = "https://www.cuny.edu/";
         Map<String, Set<Image>> images = new WebCrawler(url).crawl();
 
-        images.forEach((k, v) -> {
+        /*images.forEach((k, v) -> {
             System.out.println("\nURL '" + k + "':\n\tImages:");
             v.forEach(img -> System.out.println("\t\t" + img));
-        });
+        });*/
     }
 }
